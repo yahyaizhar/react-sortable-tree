@@ -133,15 +133,22 @@ export default class DndManager {
 
     if (typeof this.customCanDrop === 'function') {
       const { node } = monitor.getItem();
-      const addedResult = memoizedInsertNode({
-        treeData: this.treeData,
-        newNode: node,
-        depth: targetDepth,
-        getNodeKey: this.getNodeKey,
-        minimumTreeIndex: dropTargetProps.listIndex,
-        expandParent: true,
-      });
-
+      let addedResult;
+      try {
+				 addedResult = memoizedInsertNode({
+          treeData: this.treeData,
+          newNode: node,
+          depth: targetDepth,
+          getNodeKey: this.getNodeKey,
+          minimumTreeIndex: dropTargetProps.listIndex,
+          expandParent: true,
+        });
+			} catch (e) {
+				// FIX: this is a temporary fix because the above code sometimes throws an exception. An issue has been raised
+        // with the original project https://github.com/fritz-c/react-sortable-tree/issues/259.
+        return false;
+			}
+      
       return this.customCanDrop({
         node,
         prevPath: monitor.getItem().path,
