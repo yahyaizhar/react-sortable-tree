@@ -1391,7 +1391,15 @@ function insertNode(_ref22) {
   });
 
   if (!('insertedTreeIndex' in insertResult)) {
-    return null;
+    return {
+      treeData: [newNode],
+      treeIndex: 0,
+      path: [getNodeKey({
+        node: newNode,
+        treeIndex: 0
+      })],
+      parentNode: null
+    };
   }
 
   var treeIndex = insertResult.insertedTreeIndex;
