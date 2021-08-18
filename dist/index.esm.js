@@ -1383,7 +1383,7 @@ function insertNode(_ref22) {
   });
 
   if (!('insertedTreeIndex' in insertResult)) {
-    throw new Error('No suitable position found to insert.');
+    return null;
   }
 
   var treeIndex = insertResult.insertedTreeIndex;

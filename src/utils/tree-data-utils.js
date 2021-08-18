@@ -920,7 +920,7 @@ export function insertNode({
   });
 
   if (!('insertedTreeIndex' in insertResult)) {
-    throw new Error('No suitable position found to insert.');
+    return null;
   }
 
   const treeIndex = insertResult.insertedTreeIndex;
