@@ -920,7 +920,12 @@ export function insertNode({
   });
 
   if (!('insertedTreeIndex' in insertResult)) {
-    return null;
+    return {
+      treeData: [newNode],
+      treeIndex: 0,
+      path: [getNodeKey({ node: newNode, treeIndex: 0 })],
+      parentNode: null,
+    };
   }
 
   const treeIndex = insertResult.insertedTreeIndex;
